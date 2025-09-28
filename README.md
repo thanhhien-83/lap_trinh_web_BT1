@@ -14,16 +14,25 @@ Vai trò: Chứa toàn bộ logic tính “Lazy Index” (nhận các giờ đ�
 Không nhập/xuất trực tiếp (không Console, không UI, không phụ thuộc web).  
 Expose: các thuộc tính input + phương thức tính + các thuộc tính kết quả.  
 Dùng lại cho cả 3 ứng dụng còn lại.  
+# Hình ảnh kiểm thử  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/f0298537-5484-4c80-ae40-920a4a8e645a" />  
+
 
 # 2. Ứng dụng Console (.NET Framework 2.0)  
 Nhiệm vụ: Hỏi người dùng các giờ → gọi DLL → in ra LI, mức, icon, thông điệp.  
 Mục đích chính: Test nhanh logic, minh họa tái sử dụng.  
 Có “dấu ấn cá nhân” (ví dụ tên bạn, câu chào, lời khuyên).  
+# Hình ảnh kiểm thử  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/223e1621-fadd-47f0-a398-694881cbd4dc" />  
+
 
 # 3. Ứng dụng Windows Forms (.NET Framework 2.0)  
 Giao diện: TextBox nhập giờ, Button “Tính”, Label hiển thị kết quả (LI, icon, phân loại, thông điệp).  
 Quy trình: Lấy dữ liệu form → gọi DLL → hiển thị lại trên form.  
 Thêm chút trình bày (màu sắc / font / tiêu đề có tên bạn) để thể hiện tính cá nhân.  
+# Hình ảnh kiểm thử  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1f0feb78-a264-46a1-bd76-befd5a76011a" />  
+
 
 # 4. Ứng dụng Web (ASP.NET 2.0 + IIS)  
 Frontend: index.html (HTML/CSS/JS) nhập giờ, gửi yêu cầu.  
@@ -31,6 +40,11 @@ Backend: Endpoint (ví dụ api.ashx hoặc api.aspx) nhận POST → dùng DLL 
 Chạy qua IIS (hoặc IIS Express khi dev), có thể thêm thanh màu thể hiện mức.  
 JavaScript: kiểm tra dữ liệu trước khi gửi, nhận JSON rồi cập nhật giao diện.  
 Giữ nét cá nhân (tiêu đề, footer, lời khuyên).  
+# Hình ảnh kiểm thử  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/970f2ad5-b08d-4521-9434-12e991b4c90b" />  
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/9b64349f-8fce-4dcb-99a1-6acc5be84198" />
+
+
 
 
 
