@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Lazy Index Web — Thanh Hiền 83</title>
+    <style>
+        :root {
+            --bg1: #f4f4f9;
+            --bg2: #e6f0fa;
+            --card: #ffffff;
+            --border: #d1d5db;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --primary1: #10b981;
+            --primary2: #34d399;
+            --ok: #22c55e;
+            --warn: #f59e0b;
+            --bad: #ef4444;
+            --shadow: 0 4px 12px rgba(0,0,0,0.1)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);
+            min-height: 100vh;
+            font-family: 'Inter',system-ui,-apple-system,Roboto,Arial,sans-serif;
+            line-height: 1.6
+        }
+
+        .wrap {
+            max-width: 720px;
+            margin: 40px auto;
+            padding: 0 16px
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            overflow: hidden
+        }
+
+        .head {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(90deg,rgba(16,185,129,.1),rgba(52,211,153,.1))
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(45deg,var(--primary1),var(--primary2))
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary1)
+        }
+
+        .sig {
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 500
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 20px
+        }
+
+        .pane {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px
+        }
+
+            .pane h3 {
+                margin: 0 0 12px;
+                color: var(--muted);
+                font-size: 16px;
+                font-weight: 600
+            }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px
+        }
+
+        .label {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 6px
+        }
+
+        .input {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: #fafafa;
+            color: var(--text);
+            outline: none;
+            transition: border-color .2s,box-shadow .2s
+        }
+
+            .input:focus {
+                border-color: var(--primary1);
+                box-shadow: 0 0 0 3px rgba(16,185,129,.15)
+            }
+
+        .btns {
+            display: flex;
+            gap: 12px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .btn {
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            background: linear-gradient(90deg,var(--primary1),var(--primary2));
+            transition: filter .2s,transform .1s
+        }
+
+            .btn:hover {
+                filter: brightness(1.05)
+            }
+
+            .btn:active {
+                transform: translateY(1px)
+            }
+
+            .btn.secondary {
+                background: linear-gradient(90deg,#6b7280,#9ca3af)
+            }
+
+        .err {
+            display: none;
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: #fef2f2;
+            color: var(--bad);
+            border: 1px solid #fecaca;
+            font-size: 14px
+        }
+
+        .score {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #f9fafb;
+            text-align: center
+        }
+
+        .li {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary1)
+        }
+
+        .pill {
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text)
+        }
+
+            .pill.ok {
+                background: #ecfdf5;
+                color: var(--ok);
+                border-color: #a7f3d0
+            }
+
+            .pill.warn {
+                background: #fffbeb;
+                color: var(--warn);
+                border-color: #fed7aa
+            }
+
+            .pill.bad {
+                background: #fef2f2;
+                color: var(--bad);
+                border-color: #fecaca
+            }
+
+        .meter {
+            position: relative;
+            margin-top: 12px;
+            height: 12px;
+            border-radius: 999px;
+            overflow: hidden;
+            background: #e5e7eb
+        }
+
+            .meter::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(90deg,var(--ok) 0%,var(--warn) 50%,var(--bad) 100%)
+            }
+
+        .needle {
+            --x: 50;
+            position: absolute;
+            top: -8px;
+            left: calc(var(--x)*1%);
+            transform: translateX(-50%);
+            width: 4px;
+            height: 16px;
+            background: var(--text);
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1)
+        }
+
+        .scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 6px
+        }
+
+        .report {
+            white-space: pre-line;
+            margin-top: 14px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fff;
+            color: var(--text);
+            font-size: 14px
+        }
+
+            .report .lead {
+                display: block;
+                font-weight: 700;
+                margin-bottom: 6px
+            }
+
+            .report .small {
+                color: var(--muted);
+                font-size: 12px
+            }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="card">
+            <div class="head">
+                <div class="brand">
+                    <div class="logo" aria-hidden="true"></div>
+                    <div>
+                        <h2>Chỉ số Lười Biếng (Lazy Index)</h2>
+                        <div class="sig">by Thanh Hiền 83</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid">
+                <!-- Nhập liệu -->
+                <div class="pane">
+                    <h3>Nhập dữ liệu</h3>
+                    <div class="row">
+                        <div><div class="label">Ngủ (giờ/ngày)</div>     <input id="sleep" class="input" placeholder="vd: 8" /></div>
+                        <div><div class="label">Giải trí (giờ/ngày)</div> <input id="ent" class="input" placeholder="vd: 1" /></div>
+                        <div><div class="label">Học tập (giờ/ngày)</div>  <input id="study" class="input" placeholder="vd: 2" /></div>
+                        <div><div class="label">Làm việc (giờ/ngày)</div> <input id="work" class="input" placeholder="vd: 4" /></div>
+                    </div>
+                    <div class="btns">
+                        <button id="go" class="btn">Tính LI</button>
+                        <button id="reset" class="btn secondary">Làm mới</button>
+                    </div>
+                    <div id="err" class="err"></div>
+                </div>
+
+                <!-- Kết quả -->
+                <div class="pane">
+                    <h3>Kết quả</h3>
+                    <div class="score">
+                        <div class="li" id="li">—</div>
+                        <div class="pill" id="cat">Chưa có</div>
+                        <div id="emo" style="font-size:22px"></div>
+                    </div>
+                    <div class="meter"><div class="needle" id="needle" style="--x:50"></div></div>
+                    <div class="scale"><span>0</span><span>30</span><span>60</span><span>100</span></div>
+                    <div class="report" id="report"><span class="lead">Lazy Index sẽ hiện tại đây.</span><span class="small">Nhập số liệu và bấm “Tính LI”.</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function $(id) { return document.getElementById(id); }
+        function parseF(s) { if (!s) return NaN; s = s.trim().replace(',', '.'); var v = parseFloat(s); return isNaN(v) ? NaN : v; }
+        function showErr(msg) { var e = $('err'); e.style.display = 'block'; e.textContent = msg || 'Lỗi'; }
+        function clearErr() { $('err').style.display = 'none'; }
+
+        function setCategory(catText) {
+            var el = $('cat');
+            el.className = 'pill';
+            var low = /chăm/i.test(catText);
+            var high = /lười/i.test(catText);
+            if (low) el.className += ' ok';
+            else if (high) el.className += ' bad';
+            else el.className += ' warn';
+            el.textContent = catText || '';
+        }
+        function setGauge(li) {
+            if (typeof li !== 'number' || !isFinite(li)) li = 0;
+            if (li < 0) li = 0; if (li > 100) li = 100;
+            $('needle').style.setProperty('--x', li);
+        }
+
+        async function postApi(sleep, ent, study, work) {
+            var body = "s=" + encodeURIComponent(String(sleep)) +
+                "&e=" + encodeURIComponent(String(ent)) +
+                "&t=" + encodeURIComponent(String(study)) +
+                "&w=" + encodeURIComponent(String(work));
+            var res = await fetch('api.ashx', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body });
+            var text = await res.text();
+            try { return JSON.parse(text); } catch (e) { return { ok: false, msg: (res.ok ? 'Không phải JSON' : ('HTTP ' + res.status)) + (text ? (' - ' + text) : '') }; }
+        }
+
+        async function calc() {
+            clearErr();
+            var s = parseF($('sleep').value), e = parseF($('ent').value), t = parseF($('study').value), w = parseF($('work').value);
+            if (!(isFinite(s) && isFinite(e) && isFinite(t) && isFinite(w))) { showErr('Nhập số hợp lệ cho 4 ô.'); return; }
+            var data = await postApi(s, e, t, w);
+            if (data && data.ok) {
+                $('li').textContent = (data.li != null ? data.li : '—');
+                setCategory(data.category || '');
+                $('emo').textContent = data.emoji || '';
+                $('report').textContent = data.report || '';
+                setGauge(typeof data.li === 'number' ? data.li : parseF(String(data.li)));
+            } else {
+                showErr(data && data.msg ? data.msg : 'Lỗi máy chủ.');
+            }
+        }
+
+        function resetForm() {
+            $('sleep').value = '8'; $('ent').value = '1'; $('study').value = '2'; $('work').value = '4';
+            $('li').textContent = '—'; $('cat').textContent = 'Chưa có'; $('cat').className = 'pill'; $('emo').textContent = '';
+            $('report').innerHTML = '<span class="lead">Lazy Index sẽ hiện tại đây.</span><span class="small">Nhập số liệu và bấm “Tính LI”.</span>';
+            setGauge(0); clearErr();
+        }
+
+        $('go').addEventListener('click', calc);
+        $('reset').addEventListener('click', resetForm);
+        resetForm();
+    </script>
+</body>
+</html>
